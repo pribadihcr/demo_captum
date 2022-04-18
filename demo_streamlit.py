@@ -1,5 +1,6 @@
 from torch.nn.functional import assert_int_or_pair
 import streamlit as st
+st.set_option('deprecation.showPyplotGlobalUse', False)
 from torchvision import transforms
 from PIL import Image
 import numpy as np
