@@ -52,20 +52,26 @@ def interpretation_transform(path):
 def interpretation_show(attributions):
     return np.transpose(attributions.squeeze().cpu().detach().numpy(), (1,2,0))
 
+
 @st.cache
-def main(path):
+def load_model():
     model = create_model(
-        "semnasnet_075",
-        pretrained=False,
-        num_classes=17,
-        in_chans=3,
-        global_pool=None,
-        scriptable=False)
+    "semnasnet_075",
+    pretrained=False,
+    num_classes=17,
+    in_chans=3,
+    global_pool=None,
+    scriptable=False)
 
     checkpoint = "model_best.pth.tar"
     use_ema = False
     load_checkpoint(model, checkpoint, use_ema)
     model.eval()
+    return model
+
+
+@st.cache
+def main(path, model):
     def predict(path, model):
         image = open_transform_image(path)
         output = predict_logits(image, model)
@@ -118,12 +124,13 @@ st.title('Industrial Visualization')
 
 st.sidebar.header("User Input Image")
 
+model = load_model()
 img = st.sidebar.file_uploader(label='Upload your BMP file', type=['bmp'])
 if img:
     image = Image.open(img)
     st.image(image)
 
-    model, pred_ix = main(img)
+    model, pred_ix = main(img, model)
     input_img = open_transform_image(img).unsqueeze(0)
     input_img.requires_grad = True
     transformed_img = interpretation_transform(img)
