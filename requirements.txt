@@ -1,4 +1,4 @@
-timm==0.5.4
+git+https://github.com/rwightman/pytorch-image-models.git
 torch
 captum
 matplotlib
