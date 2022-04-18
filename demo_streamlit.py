@@ -6,6 +6,7 @@ import numpy as np
 from torch.nn import functional as F
 from matplotlib.colors import LinearSegmentedColormap
 import torch
+import json
 from timm.models import create_model, apply_test_time_pool, load_checkpoint, is_model, list_models
 
 from captum.attr import IntegratedGradients, DeepLift, GradientShap, Occlusion
@@ -13,8 +14,8 @@ from captum.attr import visualization as viz
 
 @st.cache
 def classes():
-    cl = joblib.load('classes.pkl')
-    return cl
+    categories = json.load(open('net_labels.json', 'r'))
+    return categories
 
 def open_transform_image(path):
     mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
