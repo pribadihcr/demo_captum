@@ -75,6 +75,7 @@ def main(path):
 
 @st.cache
 def interpretation_deeplift(model, input_img, pred_ix):
+    model.zero_grad()
     dl = DeepLift(model)
     attributions_dl = dl.attribute(input_img,
                                           baselines=input_img*0,
@@ -84,6 +85,7 @@ def interpretation_deeplift(model, input_img, pred_ix):
 
 @st.cache
 def interpretation_occlusion(model, input_img, pred_ix):
+    model.zero_grad()
     occlusion = Occlusion(model)
 
     attributions_occ = occlusion.attribute(input_img,
@@ -95,6 +97,7 @@ def interpretation_occlusion(model, input_img, pred_ix):
 
 @st.cache
 def interpretation_gradient_shap(model, input_img, pred_ix):
+    model.zero_grad()
     gradient_shap = GradientShap(model)
 
     # Defining baseline distribution of images
