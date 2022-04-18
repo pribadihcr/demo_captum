@@ -60,7 +60,7 @@ def main(path):
         global_pool=None,
         scriptable=False)
 
-    checkpoint = "/media/aoi-dl/aa07be24-04e9-4c7b-a9cd-8d20097adefa/AOITEK/CODE/Visual-Attention-Network/VAN-Classification/output/train/20220408-152320-semnasnet_075-224_98.15917862178057/model_best.pth.tar"
+    checkpoint = "model_best.pth.tar"
     use_ema = False
     load_checkpoint(model, checkpoint, use_ema)
     model.eval()
