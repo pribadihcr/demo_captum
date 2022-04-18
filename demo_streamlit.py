@@ -24,7 +24,7 @@ def open_transform_image(path):
             transforms.Resize((256, 256)),
             transforms.CenterCrop((224, 224)),
             transforms.ToTensor(),
-            transforms.Normalize(mean, std, inplace=True)
+            transforms.Normalize(mean, std)
         ])
     img = Image.open(path)
     image = img_transforms(img)
