@@ -124,6 +124,7 @@ if img:
 
     model, pred_ix = main(img)
     input_img = open_transform_image(img).unsqueeze(0)
+    input_img.requires_grad = True
     transformed_img = interpretation_transform(img)
     labels = [classes()[pr] for pr in pred_ix]
     result = (f'**{labels[0]}**')
