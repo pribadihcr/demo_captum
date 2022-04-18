@@ -1,4 +1,4 @@
-git+https://github.com/rwightman/pytorch-image-models.git
+git+https://github.com/pribadihcr/pytorch-image-models.git
 torch
 captum
 matplotlib
